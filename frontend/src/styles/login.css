@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+main > .h1-login {
+  margin-bottom: 4rem;
+}
+
+main > .div-login > label {
+  margin-bottom: 0.5rem;
+}
+
+main > .div-login > input {
+  margin-right: 1rem;
+}
+
+main > .div-login > .button-register {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: lightyellow;
+}
+
+main > .div-google {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+main > .div-google > .register-google {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: lightyellow;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}

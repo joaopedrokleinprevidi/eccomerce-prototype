@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype Eccomerce</title>
+    <link rel="stylesheet" href="../styles/login.css">
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
+    <script type="module" src="../script/login/authEmailAndPassword.js"></script>
+    <script type="module" src="../script/login/authGoogle.js"></script>
+    <script type="module" src="../script/firebaseConnection.js"></script>
+
+
+</head>
+
+<body>
+
+    <main>
+        <h1 class="h1-login">Cadastre sua conta</h1>
+        <div class="div-login">
+
+            <label for="login">Email</label>
+            <input type="email" name="login" id="emailInput">
+
+            <label for="password">Senha</label>
+            <input type="password" name="password" id="passwordInput">
+
+            <button class="button-register">Registrar</button>
+        </div>
+        <div class="div-google">
+            <h1 class="h1-google">OU</h1>
+            <button class="register-google">Entrar com o Google</button>
+        </div>
+    </main>
+
+</body>
+
+</html>
