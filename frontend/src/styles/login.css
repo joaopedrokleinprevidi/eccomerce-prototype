@@ -17,15 +17,31 @@ main > .h1-login {
   margin-bottom: 4rem;
 }
 
+main > .div-login {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 main > .div-login > label {
   margin-bottom: 0.5rem;
 }
 
 main > .div-login > input {
-  margin-right: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-main > .div-login > button {
+main > .div-login > select {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+main > .div-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main > .div-button > button {
   padding: 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -47,4 +63,5 @@ main > .div-google > .register-google {
   background-color: lightyellow;
   border-radius: 0.5rem;
   cursor: pointer;
+  margin-bottom: 2rem;
 }

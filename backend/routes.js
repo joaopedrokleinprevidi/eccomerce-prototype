@@ -8,6 +8,8 @@ router.get("/config", (_req, res) => {
 
 router.get("/users", usersControllers.getAllUsers);
 
-router.post("/login", usersControllers.newUser);
+router.post("/users/login", usersControllers.loginUser);
+
+router.post("/users/register", usersControllers.newUser);
 
 module.exports = router;

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar</title>
+    <link rel="stylesheet" href="../styles/login.css">
+    <script type="module" src="../script/authentication/register/authEmailAndPassword.js" defer></script>
+    <script type="module" src="../script/firebaseConnection.js" defer></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js" defer></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <h1 class="h1-login">Cadastrar</h1>
+        <form class="div-login">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="emailInput">
+
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="passwordInput">
+
+            <label for="nome_completo">Nome completo</label>
+            <input type="text" name="nome_completo">
+
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf">
+
+            <label for="celular">Celular</label>
+            <input type="tel" name="celular" id="">
+
+            <label for="sexo">Sexo</label>
+            <select name="sexo">
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="prefiro nao declarar">Prefiro não declarar</option>
+            </select>
+
+            <label for="nascimento">Data de nascimento</label>
+            <input type="text" name="nascimento">
+
+            <label for="cep">Cep: </label>
+            <input type="text" name="cep">
+
+            <label for="endereco">Endereço</label>
+            <input type="text" name="endereco">
+
+
+            <label for="numero_endereco">Numero</label>
+            <input type="number" name="numero_endereco">
+
+
+            <label for="complemento">Complemento</label>
+            <input type="text" name="complemento">
+
+            <label for="referencia">Referência</label>
+            <input type="text" name="referencia">
+
+            <label for="cidade">Cidade</label>
+            <input type="text" name="cidade">
+
+            <label for="estado">Estado</label>
+            <select name="estado">
+                <option value="Acre">Acre</option>
+                <option value="Alagoas">Alagoas</option>
+                <option value="Amapá">Amapá</option>
+                <option value="Amazonas">Amazonas</option>
+                <option value="Bahia">Bahia</option>
+                <option value="Ceará">Ceará</option>
+                <option value="Espírito Santo">Espírito Santo</option>
+                <option value="Goiás">Goiás</option>
+                <option value="Maranhão">Maranhão</option>
+                <option value="Mato Grosso">Mato Grosso</option>
+                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                <option value="Minas Gerais">Minas Gerais</option>
+                <option value="Pará">Pará</option>
+                <option value="Paraíba">Paraíba</option>
+                <option value="Paraná">Paraná</option>
+                <option value="Pernambuco">Pernambuco</option>
+                <option value="Piauí">Piauí</option>
+                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                <option value="Rondônia">Rondônia</option>
+                <option value="Roraima">Roraima</option>
+                <option value="Santa Catarina">Santa Catarina</option>
+                <option value="São Paulo">São Paulo</option>
+                <option value="Sergipe">Sergipe</option>
+                <option value="Tocantins">Tocantins</option>
+            </select>
+        </form>
+
+        <div class="div-button"><button class="button-register">Registrar</button></div>
+
+    </main>
+</body>
+
+</html>
