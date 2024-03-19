@@ -6,7 +6,7 @@ let firebaseConfig;
 // Função para inicializar o Firebase Auth
 async function initializeFirebaseAuth() {
   // Fetch para obter o firebaseConfig do backend
-  await fetch("http://localhost:3000/config")
+  await fetch("http://localhost:3000/config") //TIRAR O ACESSO DESSA REQUISIÇÃO PARA TODOS.
     .then(async (response) => {
       const configData = await response.json();
       firebaseConfig = configData;

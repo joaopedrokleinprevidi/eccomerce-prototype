@@ -10,6 +10,7 @@
     <script type="module" src="../script/firebaseConnection.js" defer></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js" defer></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js" defer></script>
+    <script type="module" src="../script/authentication/showErrors/backendErrors.js"></script>
 </head>
 
 <body>
@@ -18,10 +19,10 @@
         <form class="div-login">
 
             <label for="email">Email</label>
-            <input type="email" name="email" id="emailInput">
+            <input type="email" name="email" id="emailInput" autocomplete="email">
 
             <label for="senha">Senha</label>
-            <input type="password" name="senha" id="passwordInput">
+            <input type="password" name="senha" id="passwordInput" autocomplete="current-password">
 
             <label for="nome_completo">Nome completo</label>
             <input type="text" name="nome_completo">
@@ -32,32 +33,32 @@
             <label for="celular">Celular</label>
             <input type="tel" name="celular" id="">
 
-            <label for="sexo">Sexo</label>
+            <label for="sexo">Gênero</label>
             <select name="sexo">
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
-                <option value="prefiro nao declarar">Prefiro não declarar</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Preferiu não declarar">Prefiro não declarar</option>
             </select>
 
             <label for="nascimento">Data de nascimento</label>
             <input type="text" name="nascimento">
 
-            <label for="cep">Cep: </label>
+            <label for="cep">Cep </label>
             <input type="text" name="cep">
 
             <label for="endereco">Endereço</label>
-            <input type="text" name="endereco">
+            <input type="text" name="endereco" placeholder="Rua YYY, Bairro XXX">
 
 
-            <label for="numero_endereco">Numero</label>
-            <input type="number" name="numero_endereco">
+            <label for="numero_endereco">Numero do Endereço</label>
+            <input type="number" name="numero_endereco" placeholder="882">
 
 
             <label for="complemento">Complemento</label>
-            <input type="text" name="complemento">
+            <input type="text" name="complemento" placeholder="Descendo a escadaria">
 
             <label for="referencia">Referência</label>
-            <input type="text" name="referencia">
+            <input type="text" name="referencia" placeholder="Na frente da padaria">
 
             <label for="cidade">Cidade</label>
             <input type="text" name="cidade">

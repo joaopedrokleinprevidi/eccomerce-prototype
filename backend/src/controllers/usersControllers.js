@@ -1,6 +1,6 @@
 const usersModel = require("../models/usersModel");
 
-const getAllUsers = async () => {
+const getAllUsers = async (_request, response) => {
   const users = await usersModel.getAllUsers();
   return response.status(200).json(users);
 };

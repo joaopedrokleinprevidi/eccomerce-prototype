@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebase
 import initializeFirebaseAuth from "../../firebaseConnection.js";
 
 import newUser from "../../requests/newUser.js";
+import showErrorsByMiddlewaresInBackEnd from "../showErrors/backendErrors.js";
 
 const buttonRegister = document.querySelector(".button-register");
 
@@ -40,6 +41,7 @@ async function handleRegisterNewUser(event) {
     })
     .catch((error) => {
       console.error("Erro ao cadastrar: ", error);
+      showErrorsByMiddlewaresInBackEnd(error);
     });
 }
 

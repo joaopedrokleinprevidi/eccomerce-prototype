@@ -2,18 +2,26 @@ const admin = require("firebase-admin");
 const database = require("../config/firebaseConnection");
 const bcryptService = require("../services/bcryptService");
 
-const getAllUsers = async (response) => {
-  await admin
-    .firestore()
-    .collection("users")
-    .get()
-    .then((snapshot) => {
-      const users = snapshot.docs.map((doc) => ({
-        uid: doc.id,
-        ...doc.data(),
-      }));
-      response.json(users);
-    });
+const getAllUsers = async () => {
+  const snapshot = await admin.firestore().collection("users").get();
+  const users = snapshot.docs.map((doc) => ({
+    uid: doc.id,
+    ...doc.data(),
+  }));
+  return users;
+
+
+  // await admin
+  //   .firestore()
+  //   .collection("users")
+  //   .get()
+  //   .then((snapshot) => {
+  //     const users = snapshot.docs.map((doc) => ({
+  //       uid: doc.id,
+  //       ...doc.data(),
+  //     }))
+  //     return users
+  //   });
 };
 
 const newUser = async (user) => {
@@ -84,10 +92,8 @@ const loginUser = async (user) => {
 
         const verifyPassword = bcryptService.compareInput(senha, user.senha);
         if (verifyPassword) {
-          console.log("Usuário logado");
+          console.log("Usuário logado in backend");
           return;
-        } else {
-          console.log("Senha incorreta");
         }
       }
     })

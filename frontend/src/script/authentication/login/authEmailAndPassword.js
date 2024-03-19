@@ -2,6 +2,9 @@ import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/1
 import initializeFirebaseAuth from "../../firebaseConnection.js";
 
 import loginUser from "../../requests/loginUser.js";
+import showErrorsByFirebaseInFrontEnd from "../showErrors/firebaseErrors.js";
+
+import homeUsers from '../../requests/home.js'
 
 const buttonLogin = document.querySelector(".button-login");
 
@@ -15,24 +18,37 @@ async function handleLoginExistentUser(e) {
 
   const auth = await initializeFirebaseAuth();
   signInWithEmailAndPassword(auth, email, senha)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       console.log("login data: ", userCredential.user);
-
+      const tokenUser = await userCredential.user.getIdToken(
+        /*forceRefresh */
+        true
+      );
+      console.log("token data: ", tokenUser);
       loginUser(email, senha);
       alert("Usuário logado");
+      isLogged(tokenUser)
     })
+    
     .catch((error) => {
       //Pode ser implementado middleware tanto aqui quanto no back no cadastro tbm
-      if (error.code == "auth/invalid-credential") {
-        alert("A senha ou o email estão incorretos.");
-      }
-      if (error.code == "auth/too-many-requests") {
-        alert(
-          "Muitas tentativas incorretas de login. Aguarde um pouco ou troque a senha."
-        );
-      }
+      const errorCode = error.code;
+      showErrorsByFirebaseInFrontEnd(errorCode);
       console.error("Erro ao logar: ", error);
     });
 }
+
+const isLogged = async (token) => {
+  const auth = await initializeFirebaseAuth()
+  auth.onAuthStateChanged(async (user) => {
+    if(user){
+      alert("User has been authenticated with sucess")
+      console.log(user)
+      await homeUsers(token).then(response => {console.log(response)} ).catch(error => { console.error("Deu erro ao chamar HomeUsers: " + error)})
+      // await homeUsers(token);
+    }
+  })
+}
+
 
 buttonLogin.addEventListener("click", handleLoginExistentUser);
