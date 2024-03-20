@@ -11,10 +11,12 @@ const form = document.querySelector("form");
 async function handleRegisterNewUser(event) {
   event.preventDefault();
 
+  //Salvando senha de forma diferente, porque ela não irá ao banco de dados. 
+  const senha = form.senha.value
+
   //Dados recebidos do usuário
   const dataUser = {
     email: form.email.value,
-    senha: form.senha.value,
     nomeCompleto: form.nome_completo.value,
     cpf: form.cpf.value,
     celular: form.celular.value,
@@ -31,10 +33,10 @@ async function handleRegisterNewUser(event) {
 
   //Enviando dados para o Back-End > Banco De Dados
   const auth = await initializeFirebaseAuth();
-  createUserWithEmailAndPassword(auth, dataUser.email, dataUser.senha)
+  createUserWithEmailAndPassword(auth, dataUser.email, senha)
     .then((userCredential) => {
       const uid = userCredential.user.uid;
-      newUser(uid, dataUser.email, dataUser.senha, { ...dataUser });
+      newUser(uid, { ...dataUser });
       console.log({ ...dataUser });
 
       cleanFieldsOfForm();

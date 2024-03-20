@@ -1,10 +1,9 @@
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import initializeFirebaseAuth from "../../firebaseConnection.js";
 
-import loginUser from "../../requests/loginUser.js";
 import showErrorsByFirebaseInFrontEnd from "../showErrors/firebaseErrors.js";
-
-import homeUsers from '../../requests/home.js'
+// import homeUsers from '../../requests/home.js'
+import cookies from '../cookies/cookies.js'
 
 const buttonLogin = document.querySelector(".button-login");
 
@@ -24,10 +23,10 @@ async function handleLoginExistentUser(e) {
         /*forceRefresh */
         true
       );
-      console.log("token data: ", tokenUser);
-      loginUser(email, senha);
+      cookies.setCookie("token", tokenUser)
+
       alert("Usuário logado");
-      isLogged(tokenUser)
+      isLogged()
     })
     
     .catch((error) => {
@@ -38,14 +37,13 @@ async function handleLoginExistentUser(e) {
     });
 }
 
-const isLogged = async (token) => {
+const isLogged = async () => {
   const auth = await initializeFirebaseAuth()
   auth.onAuthStateChanged(async (user) => {
     if(user){
       alert("User has been authenticated with sucess")
-      console.log(user)
-      await homeUsers(token).then(response => {console.log(response)} ).catch(error => { console.error("Deu erro ao chamar HomeUsers: " + error)})
-      // await homeUsers(token);
+
+      window.location.href = "home.html"
     }
   })
 }

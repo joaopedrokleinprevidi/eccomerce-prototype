@@ -10,7 +10,6 @@ async function initializeFirebaseAuth() {
     .then(async (response) => {
       const configData = await response.json();
       firebaseConfig = configData;
-      return firebaseConfig;
     })
     .catch((error) => {
       console.error(

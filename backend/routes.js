@@ -9,19 +9,14 @@ router.get("/config", (_req, res) => {
   res.json(firebaseConfig);
 });
 
-router.get("/users", authMiddlewares.verifyUser, usersControllers.getAllUsers);
-
-router.post(
-  "/users/login",
-  inputsMiddlewares.validateInputs,
-  inputsMiddlewares.validateLogin,
-  usersControllers.loginUser
-);
+router.get("/users",
+ authMiddlewares.verifyUser,
+ usersControllers.getAllUsers);
 
 router.post(
   "/users/register",
-  inputsMiddlewares.validateInputs,
-  inputsMiddlewares.validateRegister,
+  // inputsMiddlewares.validateInputs,
+  // inputsMiddlewares.validateRegister,
   usersControllers.newUser
 );
 

@@ -1,13 +1,13 @@
 const admin = require('firebase-admin')
 
 const verifyUser = async (req, res, next) => {
-    const idToken = req.body.Authentication;
-    //body ou header?
-    //ele nao tá recebendo esse token
-    console.log("idtoken no back: ", idToken)
-    if(!idToken){
+    const authHeader = req.headers.authorization;
+
+    if(!authHeader){
         res.status(401).json('Token não informado')
     }
+
+    const idToken = authHeader.split(' ')[1]
 
     await admin.auth().verifyIdToken(idToken)
     .then(decodedToken => {

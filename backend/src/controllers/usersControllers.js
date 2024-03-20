@@ -10,13 +10,7 @@ const newUser = async (request, response) => {
   return response.status(201).json(users);
 };
 
-const loginUser = async (request, response) => {
-  const loggedUser = await usersModel.loginUser(request.body);
-  return response.status(200).json(loggedUser);
-};
-
 module.exports = {
   getAllUsers,
   newUser,
-  loginUser,
 };

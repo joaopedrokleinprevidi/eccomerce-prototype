@@ -1,10 +1,10 @@
 const enderecoAPI = "http://localhost:3000";
 
-const newUser = async (uid, email, senha, { ...rest }) => {
+const newUser = async (uid, {...rest} ) => {
   await fetch(`${enderecoAPI}/users/register`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ uid, email, senha, ...rest }),
+    body: JSON.stringify({ uid, ...rest }),
   });
 };
 
