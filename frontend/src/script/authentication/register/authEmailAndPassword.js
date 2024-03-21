@@ -11,8 +11,8 @@ const form = document.querySelector("form");
 async function handleRegisterNewUser(event) {
   event.preventDefault();
 
-  //Salvando senha de forma diferente, porque ela não irá ao banco de dados. 
-  const senha = form.senha.value
+  //Salvando senha de forma diferente, porque ela não irá ao banco de dados.
+  const senha = form.senha.value;
 
   //Dados recebidos do usuário
   const dataUser = {
@@ -40,6 +40,13 @@ async function handleRegisterNewUser(event) {
       console.log({ ...dataUser });
 
       cleanFieldsOfForm();
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          alert("User has been authenticated with sucess");
+
+          window.location.href = "home.html";
+        }
+      });
     })
     .catch((error) => {
       console.error("Erro ao cadastrar: ", error);

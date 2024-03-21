@@ -2,8 +2,7 @@ import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/1
 import initializeFirebaseAuth from "../../firebaseConnection.js";
 
 import showErrorsByFirebaseInFrontEnd from "../showErrors/firebaseErrors.js";
-// import homeUsers from '../../requests/home.js'
-import cookies from '../cookies/cookies.js'
+import cookies from "../cookies/cookies.js";
 
 const buttonLogin = document.querySelector(".button-login");
 
@@ -23,12 +22,12 @@ async function handleLoginExistentUser(e) {
         /*forceRefresh */
         true
       );
-      cookies.setCookie("token", tokenUser)
+      cookies.setCookie("token", tokenUser);
 
       alert("Usuário logado");
-      isLogged()
+      isLogged();
     })
-    
+
     .catch((error) => {
       //Pode ser implementado middleware tanto aqui quanto no back no cadastro tbm
       const errorCode = error.code;
@@ -38,15 +37,14 @@ async function handleLoginExistentUser(e) {
 }
 
 const isLogged = async () => {
-  const auth = await initializeFirebaseAuth()
+  const auth = await initializeFirebaseAuth();
   auth.onAuthStateChanged(async (user) => {
-    if(user){
-      alert("User has been authenticated with sucess")
+    if (user) {
+      alert("User has been authenticated with sucess");
 
-      window.location.href = "home.html"
+      window.location.href = "home.html";
     }
-  })
-}
-
+  });
+};
 
 buttonLogin.addEventListener("click", handleLoginExistentUser);

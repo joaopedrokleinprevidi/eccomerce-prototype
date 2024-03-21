@@ -1,66 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar</title>
     <link rel="stylesheet" href="../styles/login.css">
-    <script type="module" src="../script/authentication/register/authEmailAndPassword.js" defer></script>
-    <script type="module" src="../script/firebaseConnection.js" defer></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js" defer></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js" defer></script>
-    <script type="module" src="../script/authentication/showErrors/backendErrors.js" defer></script>
+    <script type="module" src="../script/authentication/login/editUserProfile.js" defer></script>
 </head>
 
 <body>
     <main>
-        <h1 class="h1-login">Cadastrar</h1>
+        <h1 class="h1-login">Edite seu perfil</h1>
         <form class="div-login">
-
-            <label for="email">Email</label>
-            <input type="email" name="email" id="emailInput" autocomplete="email">
-
-            <label for="senha">Senha</label>
-            <input type="password" name="senha" id="passwordInput" autocomplete="current-password">
 
             <label for="nome_completo">Nome completo</label>
             <input type="text" name="nome_completo">
 
-            <label for="cpf">CPF</label>
-            <input type="text" name="cpf">
-
             <label for="celular">Celular</label>
             <input type="tel" name="celular" id="">
 
-            <label for="sexo">Gênero</label>
-            <select name="sexo">
-                <option value="Masculino">Masculino</option>
-                <option value="Feminino">Feminino</option>
-                <option value="Preferiu não declarar">Prefiro não declarar</option>
-            </select>
-
-            <label for="nascimento">Data de nascimento</label>
-            <input type="text" name="nascimento">
-
             <label for="cep">Cep </label>
             <input type="text" name="cep">
-
-            <label for="endereco">Endereço</label>
-            <input type="text" name="endereco" placeholder="Rua YYY, Bairro XXX">
-
-
-            <label for="numero_endereco">Numero do Endereço</label>
-            <input type="number" name="numero_endereco" placeholder="882">
-
-            <label for="complemento">Complemento</label>
-            <input type="text" name="complemento" placeholder="Descendo a escadaria">
-
-            <label for="referencia">Referência</label>
-            <input type="text" name="referencia" placeholder="Na frente da padaria">
-
-            <label for="cidade">Cidade</label>
-            <input type="text" name="cidade">
 
             <label for="estado">Estado</label>
             <select name="estado">
@@ -91,9 +52,25 @@
                 <option value="Sergipe">Sergipe</option>
                 <option value="Tocantins">Tocantins</option>
             </select>
+
+            <label for="cidade">Cidade</label>
+            <input type="text" name="cidade">
+
+            <label for="endereco">Endereço</label>
+            <input type="text" name="endereco" placeholder="Rua YYY, Bairro XXX">
+
+            <label for="numero_endereco">Numero do Endereço</label>
+            <input type="number" name="numero_endereco" placeholder="882">
+
+            <label for="complemento">Complemento</label>
+            <input type="text" name="complemento" placeholder="Descendo a escadaria">
+
+            <label for="referencia">Referência</label>
+            <input type="text" name="referencia" placeholder="Na frente da padaria">
+
         </form>
 
-        <div class="div-button"><button class="button-register">Registrar</button></div>
+        <div class="div-button"><button class="button-save">Salvar</button></div>
 
     </main>
 </body>
