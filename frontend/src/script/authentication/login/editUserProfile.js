@@ -1,5 +1,4 @@
-import initializeFirebaseAuth from "../../firebaseConnection.js";
-import verifyIfUserIsAuth from "../verifyIfUserIsAuth.js";
+import verifyIfUserIsAuth from "../verifyMiddlewares/verifyIfUserIsAuth.js";
 
 const buttonEditProfile = document.querySelector("#button-edit-profile");
 const buttonSaveChanges = document.querySelector(".button-save");
@@ -9,20 +8,23 @@ const goToPageEditProfile = () => {
   window.location.href = "editprofile.html";
 };
 
-const verifyUserAndGetUserID = async () => {
-  const userId = await verifyIfUserIsAuth();
-  console.log("new function: ", userId);
-  return userId;
-};
-
 const getDataOfUser = async () => {
   try {
-    const user = await verifyUserAndGetUserID();
-    const userUid = user.uid;
-    console.log("new function: ", userUid);
+    const user = await verifyIfUserIsAuth();
+    const userUid = user.atributes.uid;
+    const userToken = user.token;
+    console.log("user uid: ", userUid);
     const response = await fetch(
-      `http://localhost:3000/users/editProfile/${userUid}`
+      `http://localhost:3000/users/editProfile/${userUid}`,
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
     );
+
     const data = await response.json();
     console.log("data of user: ", data);
     return data;
@@ -54,8 +56,8 @@ const receiveDataInProfileEditFields = async () => {
 };
 
 const getUpdatedDataOfUserAfterFilling = async () => {
-  const user = await verifyUserAndGetUserID();
-  const userUid = user.uid;
+  const user = await verifyIfUserIsAuth();
+  const userUid = user.atributes.uid;
 
   const updatedDataOfUser = {
     uid: userUid,
@@ -76,11 +78,17 @@ const getUpdatedDataOfUserAfterFilling = async () => {
 const saveChanges = async () => {
   try {
     const updatedDataOfUser = await getUpdatedDataOfUserAfterFilling();
+    const user = await verifyIfUserIsAuth();
+    const userToken = user.token;
+    console.log("user token in saveChanges", userToken);
 
     console.log(updatedDataOfUser);
     await fetch("http://localhost:3000/users/editProfile", {
       method: "put",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
       body: JSON.stringify(updatedDataOfUser),
     });
     alert("Usuário atualizado com sucesso");

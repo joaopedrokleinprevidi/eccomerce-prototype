@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,16 @@
     <script type="module" src="../script/requests/home.js" defer></script>
     <script type="module" src="../script/authentication/login/deleteAccount.js" defer></script>
     <script type="module" src="../script/authentication/login/editUserProfile.js" defer></script>
+    <script type="module" src="../script/authentication/login/signOut.js" defer></script>
+    <script type="module" src="../script/authentication/login/changePassword.js" defer></script>
+    <script type="module" src="../script/authentication/verifyMiddlewares/passwordRequirements.js" defer></script>
     <style>
         button {
-            margin: 5px;
+            margin: 20px;
+        }
+
+        .div-button {
+            margin: 20px;
         }
     </style>
 </head>
@@ -22,6 +29,12 @@
         <p id="paragrafo">Text here</p>
         <button id="button-delete-user">Delete Current User</button>
         <button id="button-edit-profile">Edit User Profile</button>
+        <button class="button-logout">Logout</button>
+        <div class="div-button">
+            <label for="changepassword">Nova senha</label>
+            <input type="text" name="changepassword" id="inputchangepassword">
+            <button id="button-change-password">Change Password</button>
+        </div>
     </main>
 
 </body>

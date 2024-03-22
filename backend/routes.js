@@ -11,12 +11,22 @@ router.get("/config", (_req, res) => {
 
 router.get("/users", authMiddlewares.verifyUser, usersControllers.getAllUsers);
 
-router.get("/users/getEmail", usersControllers.getUserByEmail);
+router.get(
+  "/users/editProfile/:uid",
+  authMiddlewares.verifyUser,
+  usersControllers.getDataOfUserByUid
+);
+router.put(
+  "/users/editProfile",
+  authMiddlewares.verifyUser,
+  usersControllers.editUser
+);
 
-router.get("/users/editProfile/:uid", usersControllers.getDataOfUserByUid);
-router.put("/users/editProfile", usersControllers.editUser);
-
-router.delete("/users", usersControllers.deleteUser);
+router.delete(
+  "/users",
+  authMiddlewares.verifyUser,
+  usersControllers.deleteUser
+);
 
 router.post(
   "/users/register",

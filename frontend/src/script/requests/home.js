@@ -1,17 +1,18 @@
-import cookies from "../authentication/cookies/cookies.js";
+import verifyIfUserIsAuth from "../authentication/verifyMiddlewares/verifyIfUserIsAuth.js";
 
 const enderecoAPI = "http://localhost:3000";
 const paragrafo = document.querySelector("#paragrafo");
 
 const homeUsers = async () => {
   try {
-    const token = cookies.getCookie("token");
-    console.log("cookie, i am: ", token);
+    const user = await verifyIfUserIsAuth();
+    const userToken = user.token;
+    console.log("cookie, i am: ", userToken);
     const response = await fetch(`${enderecoAPI}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${userToken}`,
       },
     });
 

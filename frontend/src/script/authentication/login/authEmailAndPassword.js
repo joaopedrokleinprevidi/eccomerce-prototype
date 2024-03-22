@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/1
 import initializeFirebaseAuth from "../../firebaseConnection.js";
 
 import showErrorsByFirebaseInFrontEnd from "../showErrors/firebaseErrors.js";
-import cookies from "../cookies/cookies.js";
+import verifyIfUserIsAuth from "../verifyMiddlewares/verifyIfUserIsAuth.js";
 
 const buttonLogin = document.querySelector(".button-login");
 
@@ -18,11 +18,7 @@ async function handleLoginExistentUser(e) {
   signInWithEmailAndPassword(auth, email, senha)
     .then(async (userCredential) => {
       console.log("login data: ", userCredential.user);
-      const tokenUser = await userCredential.user.getIdToken(
-        /*forceRefresh */
-        true
-      );
-      cookies.setCookie("token", tokenUser);
+      await verifyIfUserIsAuth();
 
       alert("Usuário logado");
       isLogged();
