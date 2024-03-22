@@ -5,6 +5,10 @@ require("dotenv").config({
   path: "backend/src/config/environmentVariables/firebaseAccountKey/.env",
 });
 
+require("dotenv").config({
+  path: "backend/src/config/environmentVariables/firebaseConfig/.env",
+});
+
 const serviceAccount = {
   type: process.env.TYPE,
   project_id: process.env.PROJECT_ID,
@@ -18,11 +22,24 @@ const serviceAccount = {
   client_x509_cert_url: process.env.CLIENT_URL,
   universe_domain: process.env.UNIVERSE_DOMAIN,
 };
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_CONFIG_API_KEY,
+  authDomain: process.env.FIREBASE_CONFIG_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_CONFIG_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_CONFIG_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_CONFIG_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_CONFIG_APP_ID,
+};
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
+  ...firebaseConfig,
 });
 
 const database = getFirestore();
+const auth = admin.auth();
 
-module.exports = database;
+module.exports = {
+  database,
+  auth,
+};

@@ -1,5 +1,5 @@
 const admin = require("firebase-admin");
-const database = require("../config/firebaseConnection");
+const firebase = require("../config/firebaseConnection");
 
 const getAllUsers = async () => {
   const snapshot = await admin.firestore().collection("users").get();
@@ -44,10 +44,9 @@ const deleteUser = async (user) => {
   }
 };
 
-const newUser = async (user) => {
+const newUser = async (uid, user) => {
   //Desestruturando dados de cadastro do usuário vindos do front-end
   const {
-    uid,
     email,
     nomeCompleto,
     cpf,
@@ -64,7 +63,7 @@ const newUser = async (user) => {
   } = user;
 
   //Enviando todos os dados do cadastro do usuário para o banco de dados
-  const userRef = database.collection("users");
+  const userRef = firebase.database.collection("users");
 
   await userRef
     .doc(uid)
@@ -91,7 +90,7 @@ const newUser = async (user) => {
 
 const getDataOfUserByUid = async (uid) => {
   try {
-    const userRef = database.collection("users").doc(uid);
+    const userRef = firebase.database.collection("users").doc(uid);
     const snapshot = await userRef.get();
 
     if (!snapshot.exists) {
@@ -108,7 +107,7 @@ const getDataOfUserByUid = async (uid) => {
 
 const editUser = async (dataUser) => {
   try {
-    const userRef = database.collection("users").doc(dataUser.uid);
+    const userRef = firebase.database.collection("users").doc(dataUser.uid);
     await userRef.update(dataUser);
     console.log("Usuário atualizado com sucesso!");
   } catch (error) {
