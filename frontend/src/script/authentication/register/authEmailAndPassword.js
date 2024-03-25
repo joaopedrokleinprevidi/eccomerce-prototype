@@ -1,22 +1,12 @@
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import initializeFirebaseAuth from "../../firebaseConnection.js";
-
-import newUser from "../../requests/newUser.js";
-import showErrorsByMiddlewaresInBackEnd from "../showErrors/backendErrors.js";
+import showErrorsByFirebase from "../showErrors/firebaseErrors.js";
 
 const buttonRegister = document.querySelector(".button-register");
-
 const form = document.querySelector("form");
 
-async function handleRegisterNewUser(event) {
-  event.preventDefault();
-
-  //Salvando senha de forma diferente, porque ela não irá ao banco de dados.
-  const senha = form.senha.value;
-
-  //Dados recebidos do usuário
+const receiveDataOfUser = () => {
   const dataUser = {
     email: form.email.value,
+    senha: form.senha.value,
     nomeCompleto: form.nome_completo.value,
     cpf: form.cpf.value,
     celular: form.celular.value,
@@ -30,31 +20,34 @@ async function handleRegisterNewUser(event) {
     cidade: form.cidade.value,
     estado: form.estado.value,
   };
+  return dataUser;
+};
 
-  //Enviando dados para o Back-End > Banco De Dados
-  const auth = await initializeFirebaseAuth();
-  createUserWithEmailAndPassword(auth, dataUser.email, senha)
-    .then((userCredential) => {
-      const uid = userCredential.user.uid;
-      newUser(uid, { ...dataUser });
-      console.log({ ...dataUser });
+const enderecoAPI = "http://localhost:3000";
 
+const newUser = async () => {
+  const dataOfUser = receiveDataOfUser();
+
+  await fetch(`${enderecoAPI}/users/register`, {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dataOfUser),
+  }).then(async (response) => {
+    if (response.ok) {
       cleanFieldsOfForm();
-      auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          alert("User has been authenticated with sucess");
+      alert("Usuário cadastrado com sucesso!");
+      window.location.href = "home.html";
+    } else {
+      const errorJson = await response.json();
+      console.log(errorJson);
+      showErrorsByFirebase(errorJson);
+    }
+  });
+};
 
-          window.location.href = "home.html";
-        }
-      });
-    })
-    .catch((error) => {
-      console.error("Erro ao cadastrar: ", error);
-      showErrorsByMiddlewaresInBackEnd(error);
-    });
-}
-
-buttonRegister.addEventListener("click", handleRegisterNewUser);
+buttonRegister.addEventListener("click", async () => {
+  await newUser();
+});
 
 const cleanFieldsOfForm = () => {
   form.email.value = "";

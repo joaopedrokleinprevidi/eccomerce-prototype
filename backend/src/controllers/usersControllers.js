@@ -1,4 +1,5 @@
 const usersModel = require("../models/usersModel");
+const usersFirebaseService = require("../services/usersFirebaseService");
 
 const getAllUsers = async (_request, response) => {
   const users = await usersModel.getAllUsers();
@@ -17,8 +18,38 @@ const getDataOfUserByUid = async (request, response) => {
 };
 
 const newUser = async (request, response) => {
-  const users = await usersModel.newUser(request.body);
-  return response.status(201).json(users);
+  try {
+    const uid = await usersFirebaseService.newUser(
+      request.body.email,
+      request.body.senha
+    );
+    if (uid != undefined) {
+      const users = await usersModel.newUser(uid, request.body);
+      return response.status(201).json(users);
+    }
+  } catch (error) {
+    console.error(
+      "Erro ao tentar cadastrar o usuário no backend (controller): ",
+      error
+    );
+    //Retornando erro para tratamento adequado no Front-End
+    return response.status(400).json(error);
+  }
+};
+
+const loginUser = async (request, response) => {
+  try {
+    const user = await usersFirebaseService.loginUser(
+      request.body.email,
+      request.body.senha
+    );
+    return response.status(200).json(user);
+  } catch (error) {
+    console.error(
+      "Erro ao tentar logar o usuário no backend (controller): ",
+      error
+    );
+  }
 };
 
 const editUser = async (request, response) => {

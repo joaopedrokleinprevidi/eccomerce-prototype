@@ -16,12 +16,9 @@ async function initializeFirebaseAuth() {
         "Erro ao iniciar o Firebase Authentication no FrontEnd: " + error
       );
     });
-  // ok, alterado.
+
   const app = initializeApp(firebaseConfig);
 
-  const auth = getAuth(app);
+const auth = getAuth(app);
 
-  return auth;
-}
-
-export default initializeFirebaseAuth;
+export default auth;

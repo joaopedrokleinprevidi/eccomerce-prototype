@@ -12,6 +12,11 @@
         rel="stylesheet">
 
     <title>Prototype Eccomerce</title>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js" defer></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js" defer></script>
+    <script type="module" src="../script/authentication/login/authEmailAndPassword.js" defer></script>
+    <script type="module" src="../script/firebaseConnection.js" defer></script>
+    <script type="module" src="../script/authentication/showErrors/firebaseErrors.js" defer></script>
 </head>
 
 <body>
@@ -22,7 +27,8 @@
         <div class="container-nav">
             <nav>
                 <p>Bem-vindo! :D</p>
-                <a href="login.html">Entre ou cadastre-se!</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Registro</a>
             </nav>
         </div>
     </header>
