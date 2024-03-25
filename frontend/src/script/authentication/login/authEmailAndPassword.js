@@ -1,8 +1,8 @@
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import initializeFirebaseAuth from "../../firebaseConnection.js";
 
 import showErrorsByFirebaseInFrontEnd from "../showErrors/firebaseErrors.js";
 import verifyIfUserIsAuth from "../verifyMiddlewares/verifyIfUserIsAuth.js";
+import getAuth from "../../firebaseConnection.js";
 
 const buttonLogin = document.querySelector(".button-login");
 
@@ -14,14 +14,15 @@ async function handleLoginExistentUser(e) {
   const email = emailUser.value;
   const senha = passwordUser.value;
 
-  const auth = await initializeFirebaseAuth();
+  const auth = getAuth;
+  console.log(auth);
   signInWithEmailAndPassword(auth, email, senha)
     .then(async (userCredential) => {
       console.log("login data: ", userCredential.user);
       await verifyIfUserIsAuth();
 
       alert("Usuário logado");
-      isLogged();
+      window.location.href = "home.html";
     })
 
     .catch((error) => {
@@ -32,15 +33,15 @@ async function handleLoginExistentUser(e) {
     });
 }
 
-const isLogged = async () => {
-  const auth = await initializeFirebaseAuth();
-  auth.onAuthStateChanged(async (user) => {
-    if (user) {
-      alert("User has been authenticated with sucess");
+// const isLogged = async () => {
+//   const auth = await initializeFirebaseAuth();
+//   auth.onAuthStateChanged(async (user) => {
+//     if (user) {
+//       alert("User has been authenticated with sucess");
 
-      window.location.href = "home.html";
-    }
-  });
-};
+//       window.location.href = "home.html";
+//     }
+//   });
+// };
 
 buttonLogin.addEventListener("click", handleLoginExistentUser);

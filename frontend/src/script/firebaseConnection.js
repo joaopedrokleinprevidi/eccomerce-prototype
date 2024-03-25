@@ -1,27 +1,29 @@
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-// import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import "/dotenv-config";
+console.log(process.env);
 
-// let firebaseConfig;
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_CONFIG_API_KEY,
+  authDomain: process.env.FIREBASE_CONFIG_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_CONFIG_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_CONFIG_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_CONFIG_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_CONFIG_APP_ID,
+};
 
-// // Função para inicializar o Firebase Auth
-// async function initializeFirebaseAuth() {
-//   // Fetch para obter o firebaseConfig do backend
-//   await fetch("http://localhost:3000/config") //TIRAR O ACESSO DESSA REQUISIÇÃO PARA TODOS.
-//     .then(async (response) => {
-//       const configData = await response.json();
-//       firebaseConfig = configData;
-//     })
-//     .catch((error) => {
-//       console.error(
-//         "Erro ao iniciar o Firebase Authentication no FrontEnd: " + error
-//       );
-//     });
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAHXc8p7UYug-qMEoGb4nacarrvBg52XFo",
+//   authDomain: "eccomerce-prototype-450c2.firebaseapp.com",
+//   projectId: "eccomerce-prototype-450c2",
+//   storageBucket: "eccomerce-prototype-450c2.appspot.com",
+//   messagingSenderId: "541210597903",
+//   appId: "1:541210597903:web:7cc45935ab34a7683ea17a",
+// };
+console.log(firebaseConfig);
 
-//   const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-//   const auth = getAuth(app);
+const auth = getAuth(app);
 
-//   return auth;
-// }
-
-// export default initializeFirebaseAuth;
+export default auth;

@@ -1,15 +1,7 @@
-// import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-// import initializeFirebaseAuth from "../../firebaseConnection.js";
-
-// import newUser from "../../requests/newUser.js";
-// import showErrorsByMiddlewaresInBackEnd from "../showErrors/backendErrors.js";
-
 const buttonRegister = document.querySelector(".button-register");
-
 const form = document.querySelector("form");
 
 const receiveDataOfUser = () => {
-  //Dados recebidos do usuário
   const dataUser = {
     email: form.email.value,
     senha: form.senha.value,
@@ -28,29 +20,6 @@ const receiveDataOfUser = () => {
   };
   return dataUser;
 };
-
-//Enviando dados para o Back-End > Banco De Dados
-// const auth = await initializeFirebaseAuth();
-// createUserWithEmailAndPassword(auth, dataUser.email, senha)
-//   .then((userCredential) => {
-//     const uid = userCredential.user.uid;
-//     newUser(uid, { ...dataUser });
-//     console.log({ ...dataUser });
-
-//     cleanFieldsOfForm();
-//     auth.onAuthStateChanged(async (user) => {
-//       if (user) {
-//         alert("User has been authenticated with sucess");
-
-//         window.location.href = "home.html";
-//       }
-//     });
-//   })
-//   .catch((error) => {
-//     console.error("Erro ao cadastrar: ", error);
-//     showErrorsByMiddlewaresInBackEnd(error);
-//   });
-// }
 
 const enderecoAPI = "http://localhost:3000";
 

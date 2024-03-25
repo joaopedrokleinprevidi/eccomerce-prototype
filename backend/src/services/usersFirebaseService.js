@@ -1,5 +1,4 @@
 const admin = require("firebase-admin");
-const createUserWithEmailAndPassword = admin.auth().createUser;
 
 const newUser = async (email, senha) => {
   const auth = admin.auth();
@@ -20,4 +19,20 @@ const newUser = async (email, senha) => {
   });
 };
 
-module.exports = { newUser };
+const loginUser = async (email, senha) => {
+  const auth = admin.auth();
+  admin
+    .auth()
+    .signInWithEmailAndPassword(auth, email, senha)
+    .then(async (userCredential) => {
+      console.log("login data: ", userCredential.user);
+      alert("Usuário logado");
+    })
+
+    .catch((error) => {
+      //Pode ser implementado middleware tanto aqui quanto no back no cadastro tbm
+      console.error("Erro ao logar: ", error);
+    });
+};
+
+module.exports = { newUser, loginUser };

@@ -1,5 +1,5 @@
 const usersModel = require("../models/usersModel");
-const usersService = require("../services/usersService");
+const usersFirebaseService = require("../services/usersFirebaseService");
 
 const getAllUsers = async (_request, response) => {
   const users = await usersModel.getAllUsers();
@@ -19,14 +19,32 @@ const getDataOfUserByUid = async (request, response) => {
 
 const newUser = async (request, response) => {
   try {
-    const uid = await usersService.newUser(
+    const uid = await usersFirebaseService.newUser(
       request.body.email,
       request.body.senha
     );
     const users = await usersModel.newUser(uid, request.body);
     return response.status(201).json(users);
   } catch (error) {
-    console.error("Erro ao tentar cadastrar o usuário (controller): ", error);
+    console.error(
+      "Erro ao tentar cadastrar o usuário no backend (controller): ",
+      error
+    );
+  }
+};
+
+const loginUser = async (request, response) => {
+  try {
+    const user = await usersFirebaseService.loginUser(
+      request.body.email,
+      request.body.senha
+    );
+    return response.status(200).json(user);
+  } catch (error) {
+    console.error(
+      "Erro ao tentar logar o usuário no backend (controller): ",
+      error
+    );
   }
 };
 
