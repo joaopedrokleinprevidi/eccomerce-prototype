@@ -1,7 +1,7 @@
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-import showErrorsByFirebaseInFrontEnd from "../showErrors/firebaseErrors.js";
-import verifyIfUserIsAuth from "../verifyMiddlewares/verifyIfUserIsAuth.js";
+import showErrorsByFirebase from "../showErrors/firebaseErrors.js";
+// import verifyIfUserIsAuth from "../verifyMiddlewares/verifyIfUserIsAuth.js";
 import getAuth from "../../firebaseConnection.js";
 
 const buttonLogin = document.querySelector(".button-login");
@@ -14,12 +14,14 @@ async function handleLoginExistentUser(e) {
   const email = emailUser.value;
   const senha = passwordUser.value;
 
+  console.log("email", email);
+  console.log("senha", senha);
   const auth = getAuth;
-  console.log(auth);
   signInWithEmailAndPassword(auth, email, senha)
-    .then(async (userCredential) => {
+    .then((userCredential) => {
+      console.log("AUTH DO FIREBASE FRONTEND: ", auth);
       console.log("login data: ", userCredential.user);
-      await verifyIfUserIsAuth();
+      // await verifyIfUserIsAuth();
 
       alert("Usuário logado");
       window.location.href = "home.html";
@@ -28,7 +30,8 @@ async function handleLoginExistentUser(e) {
     .catch((error) => {
       //Pode ser implementado middleware tanto aqui quanto no back no cadastro tbm
       const errorCode = error.code;
-      showErrorsByFirebaseInFrontEnd(errorCode);
+      showErrorsByFirebase(errorCode);
+      console.log("bibibi, erruuuuu loggin");
       console.error("Erro ao logar: ", error);
     });
 }

@@ -1,3 +1,5 @@
+import showErrorsByFirebase from "../showErrors/firebaseErrors.js";
+
 const buttonRegister = document.querySelector(".button-register");
 const form = document.querySelector("form");
 
@@ -24,17 +26,23 @@ const receiveDataOfUser = () => {
 const enderecoAPI = "http://localhost:3000";
 
 const newUser = async () => {
-  try {
-    const dataOfUser = receiveDataOfUser();
-    await fetch(`${enderecoAPI}/users/register`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dataOfUser),
-    });
-    cleanFieldsOfForm();
-  } catch (error) {
-    console.error("Erro no backend ao tentar cadastrar usuário: ", error);
-  }
+  const dataOfUser = receiveDataOfUser();
+
+  await fetch(`${enderecoAPI}/users/register`, {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dataOfUser),
+  }).then(async (response) => {
+    if (response.ok) {
+      cleanFieldsOfForm();
+      alert("Usuário cadastrado com sucesso!");
+      window.location.href = "home.html";
+    } else {
+      const errorJson = await response.json();
+      console.log(errorJson);
+      showErrorsByFirebase(errorJson);
+    }
+  });
 };
 
 buttonRegister.addEventListener("click", async () => {

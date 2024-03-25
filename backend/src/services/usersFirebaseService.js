@@ -14,7 +14,7 @@ const newUser = async (email, senha) => {
       })
       .catch((error) => {
         console.error("Erro ao cadastrar: ", error);
-        reject();
+        reject(error.code);
       });
   });
 };

@@ -1,10 +1,10 @@
 import { signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import initializeFirebaseAuth from "../../firebaseConnection.js";
+import getAuth from "../../firebaseConnection.js";
 
 const buttonLogout = document.querySelector(".button-logout");
 
 const logoutUser = async () => {
-  const auth = await initializeFirebaseAuth();
+  const auth = getAuth;
 
   signOut(auth)
     .then(() => {

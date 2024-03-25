@@ -23,13 +23,17 @@ const newUser = async (request, response) => {
       request.body.email,
       request.body.senha
     );
-    const users = await usersModel.newUser(uid, request.body);
-    return response.status(201).json(users);
+    if (uid != undefined) {
+      const users = await usersModel.newUser(uid, request.body);
+      return response.status(201).json(users);
+    }
   } catch (error) {
     console.error(
       "Erro ao tentar cadastrar o usuário no backend (controller): ",
       error
     );
+    //Retornando erro para tratamento adequado no Front-End
+    return response.status(400).json(error);
   }
 };
 

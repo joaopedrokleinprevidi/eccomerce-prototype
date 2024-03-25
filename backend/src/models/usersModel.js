@@ -31,11 +31,30 @@ const getUserByEmail = async (user) => {
   }
 };
 
-const deleteUser = async (user) => {
+const getUserByUid = async (user) => {
+  const { uid } = user;
+  console.log("getuserbyuid, user:", user);
   try {
-    const userData = await getUserByEmail(user);
-    const userUid = userData.uid;
+    const snapshot = await admin
+      .firestore()
+      .collection("users")
+      .where("uid", "==", uid)
+      .get();
 
+    if (snapshot.empty) {
+      console.log("Nenhum usuário encontrado com o uid fornecido");
+      return null;
+    }
+
+    return snapshot.docs[0].data();
+  } catch (error) {
+    console.error("Erro ao obter o usuário: ", error);
+    return null;
+  }
+};
+
+const deleteUser = async (userUid) => {
+  try {
     await admin.firestore().collection("users").doc(userUid).delete();
 
     console.log("Usuário deletado com sucesso.");
