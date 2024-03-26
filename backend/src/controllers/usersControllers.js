@@ -37,20 +37,20 @@ const newUser = async (request, response) => {
   }
 };
 
-const loginUser = async (request, response) => {
-  try {
-    const user = await usersFirebaseService.loginUser(
-      request.body.email,
-      request.body.senha
-    );
-    return response.status(200).json(user);
-  } catch (error) {
-    console.error(
-      "Erro ao tentar logar o usuário no backend (controller): ",
-      error
-    );
-  }
-};
+// const loginUser = async (request, response) => {
+//   try {
+//     const user = await usersFirebaseService.loginUser(
+//       request.body.email,
+//       request.body.senha
+//     );
+//     return response.status(200).json(user);
+//   } catch (error) {
+//     console.error(
+//       "Erro ao tentar logar o usuário no backend (controller): ",
+//       error
+//     );
+//   }
+// };
 
 const editUser = async (request, response) => {
   const editedUser = await usersModel.editUser(request.body);
@@ -58,7 +58,7 @@ const editUser = async (request, response) => {
 };
 
 const deleteUser = async (request, response) => {
-  await usersModel.deleteUser(request.body);
+  await usersModel.deleteUser(request.body.uid);
   return response
     .status(200)
     .json({ message: "Usuário deletado com sucesso." });

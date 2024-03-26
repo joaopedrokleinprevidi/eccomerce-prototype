@@ -4,7 +4,7 @@ const verifyUser = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    res.status(401).json("Token não informado");
+    return res.status(401).json("Token não informado");
   }
 
   const idToken = authHeader.split(" ")[1];

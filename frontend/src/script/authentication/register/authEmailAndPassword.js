@@ -36,7 +36,11 @@ const newUser = async () => {
     if (response.ok) {
       cleanFieldsOfForm();
       alert("Usuário cadastrado com sucesso!");
-      window.location.href = "home.html";
+      console.log("response:1 ", response);
+      console.log(dataOfUser);
+      console.log("user:1 ", dataOfUser.email);
+      console.log("user:1 ", dataOfUser.senha);
+      // window.location.href = "login.html";
     } else {
       const errorJson = await response.json();
       console.log(errorJson);

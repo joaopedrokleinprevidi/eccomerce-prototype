@@ -1,5 +1,5 @@
 import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import initializeFirebaseAuth from "../../firebaseConnection.js";
+import getAuth from "../../firebaseConnection.js";
 
 const buttonForgetPassword = document.querySelector(".button-forget-password");
 const emailInput = document.querySelector("#emailInput");
@@ -7,7 +7,7 @@ const emailInput = document.querySelector("#emailInput");
 const requestNewPasswordWithEmail = async () => {
   const email = emailInput.value;
 
-  const auth = await initializeFirebaseAuth();
+  const auth = getAuth;
   sendPasswordResetEmail(auth, email)
     .then(() => {
       alert("Password reset email sent!");
